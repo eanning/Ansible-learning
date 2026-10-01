@@ -1,0 +1,11 @@
+---
+- name: Deploy message of the day
+  hosts: node1
+  tasks:
+   - name: Copy motd template
+     ansible.builtin.template:
+      src: /home/automation/ex294/templates/motd.j2 
+      dest: /tmp/motd
+      owner: automation
+      group: automation
+      mode: '0644'

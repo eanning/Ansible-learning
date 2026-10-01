@@ -1,0 +1,29 @@
+---
+- name: Create and mount new storage
+  hosts: node3
+
+  tasks:
+    - name: Create a new partition with a size of 1GiB
+      community.general.parted:
+        device: /dev/sdb
+        number: 1
+        state: present
+        part_end: 1GiB
+
+    - name: Create xfs filesystem 
+      community.general.filesystem:
+        fstype: xfs
+        dev: /dev/sdb1
+
+    - name: Create mount directory
+      ansible.builtin.file:
+        path: /data
+        state: directory
+        mode: '0755'
+
+    - name: Mount the filesystem
+      ansible.posix.mount:
+        path: /data
+        src: /dev/sdb1
+        fstype: xfs
+        state: mounted 

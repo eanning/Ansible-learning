@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+Welcome to {{ ansible_facts['hostname'] }}
+Operating system: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version']}}
+IP address: {{ ansible_facts['default_ipv4']['address'] }}
+Memory: {{ ansible_facts['memtotal_mb'] }}

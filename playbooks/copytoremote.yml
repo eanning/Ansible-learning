@@ -1,0 +1,12 @@
+---
+- name: Copy file from control to nodes
+  hosts: all
+  tasks: 
+
+    - name: Copy from /tmp to /tmp
+      ansible.builtin.copy:
+        src: /tmp/test.txt
+        dest: /tmp/test-remote.txt
+        owner: automation
+        group: automation
+        mode: '644'

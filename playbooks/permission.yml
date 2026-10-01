@@ -1,0 +1,11 @@
+---
+- name: Change permission
+  hosts: all
+  tasks:
+
+    - name: Change permisssion to 700
+      ansible.builtin.file:
+        path: /tmp/test-remote.txt
+        owner: automation
+        group: automation
+        mode: '700'

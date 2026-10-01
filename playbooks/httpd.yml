@@ -1,0 +1,20 @@
+# install httpd, start service, enable service, open port in firewall
+---
+- name: Set up Apache and Open Firewall port
+  hosts: all
+  tasks:
+    - name: Install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+    - name: Start/enable httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: Open port on firewall
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        immediate: true
+        state: enabled

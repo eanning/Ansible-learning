@@ -1,0 +1,15 @@
+---
+- name: Change user password
+  hosts: localhost
+  become: true
+  vars:
+    changeme: "123"
+  tasks:
+    - name: Set password for user
+      ansible.builtin.user:
+        name: john
+#        password: "{{ 'changeme' | password_hash('sha512') }}"
+        password: "{{ changeme | password_hash('sha512') }}"
+        update_password: always
+
+# ansible-doc -t filter password_hash

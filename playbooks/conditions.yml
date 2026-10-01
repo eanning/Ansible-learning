@@ -1,0 +1,12 @@
+---
+- name: Condition example
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install httpd only on RHEL 9
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+      when:
+        - ansible_facts['distribution'] == "RedHat"
+        - ansible_facts['distribution_major_version'] == "9"

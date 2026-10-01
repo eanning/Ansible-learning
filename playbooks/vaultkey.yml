@@ -1,0 +1,21 @@
+---
+- name: Patch OS
+  hosts: all
+  become: true
+  vars_files:
+    - ~/ex294/secrets.yml
+
+  tasks:
+    - name: Register nodes to Red Hat
+      community.general.redhat_subscription:
+        state: present
+        username: "{{ rh_user }}"
+        password: "{{ rh_pass }}"
+        auto_attach: true
+      no_log: true  # prevent password leaking into logs
+
+    - name: Upgrade all packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+      tags: update-all # ansible-playbook playbooks/vaultkey.yml --ask-vault-pass -t update-all

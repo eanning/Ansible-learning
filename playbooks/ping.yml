@@ -1,0 +1,10 @@
+--- 
+- name: "Connectivity test"
+  hosts: localhost
+
+  tasks:
+    - name: "test Connectivity"
+      ping:
+
+# ansible-playbook --syntax-check ping.yml
+# ansible-playbook --check ping.yml

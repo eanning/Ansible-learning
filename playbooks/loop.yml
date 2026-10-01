@@ -1,0 +1,13 @@
+---
+- name: Lopp example
+  hosts: localhost
+  tasks:
+
+    - name: Install web tools
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - firewalld
+        - mod_ssl
